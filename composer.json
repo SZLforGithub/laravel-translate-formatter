@@ -1,0 +1,23 @@
+{
+    "name": "louissu/translate-formatter",
+    "description": "A simple tool for Laravel document translate.",
+    "type": "library",
+    "require": {
+        "php": "^7.3"
+    },
+    "require-dev": {
+        "php": "^7.3"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Louis.Su",
+            "email": "i0989872540@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Louissu\\Translate\\": "src/Handler"
+        }
+    }
+}
