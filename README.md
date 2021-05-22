@@ -15,7 +15,7 @@ ability => 權限(ability)
 It's non-case sensitive (means translate no matter upper or lower case) and will ignore code block. This result is just for reference only, so after run the `translate()` function, you still need to check them carefully, that's why the format include the resource and result.
 
 ### Example
-```
+```php
 <?php
 require "vendor/autoload.php";
 
