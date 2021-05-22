@@ -28,7 +28,7 @@ echo $handler
 ```
 
 ### setLocale()
-This function set locale from English to something you want, it's default zh-TW and only zh-TW urrently, welcome to pr!
+This function set locale from English to something you want, it's default zh-TW and only zh-TW currently, welcome to pr!
 
 ### translate()
 This function will translate the corresponding nouns and return the result.
