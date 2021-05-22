@@ -50,6 +50,10 @@ class Handler
     {
         $file =  "{$this->i18nDir}{$this->locale}.json";
 
+        if (!is_file($file)) {
+            throw new \ErrorException("This locale is not yet supported!");
+        }
+
         return json_decode(file_get_contents($file), true);
     }
 
