@@ -49,7 +49,7 @@ class Handler
     private function getNounsList()
     {
         $file =  "{$this->i18nDir}{$this->locale}.json";
-        
+
         return json_decode(file_get_contents($file), true);
     }
 
