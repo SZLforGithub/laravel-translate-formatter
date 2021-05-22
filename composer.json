@@ -1,5 +1,5 @@
 {
-    "name": "louissu/translate-formatter",
+    "name": "louissu/laravel-translate-formatter",
     "description": "A simple tool for Laravel document translate.",
     "type": "library",
     "require": {
