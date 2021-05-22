@@ -14,34 +14,36 @@ class Handler
         return $this;
     }
 
-    public function getLocale()
+    public function translate(string $rawContents)
     {
-        return $this->locale ?? '';
-    }
-
-    public function translate(string $rawContent)
-    {
-        $content = $rawContent;
-
+        $contents = explode(PHP_EOL, $rawContents);
         $nounsList = $this->getNounsList();
 
-        foreach ($nounsList['compound_nouns'] as $raw_compound_noun => $compound_noun) {
-            $content = preg_replace(
-                "/(?<=[^a-z0-9A-Z]){$raw_compound_noun}(?=[^a-z0-9A-Z])/i",
-                "$compound_noun ($raw_compound_noun)",
-                $content
-            );
+        foreach ($contents as &$content) {
+            if ($this->isCodeBlock($content)) {
+                continue;
+            }
+
+            foreach ($nounsList['compound_nouns'] as $raw_compound_noun => $compound_noun) {
+                $content = preg_replace(
+                    "/(?<=[^a-z0-9A-Z#]){$raw_compound_noun}(?=[^a-z0-9A-Z])/i",
+                    "$compound_noun($raw_compound_noun)",
+                    $content
+                );
+            }
+
+            foreach ($nounsList['nouns'] as $raw_noun => $noun) {
+                $content = preg_replace(
+                    "/(?<=[^a-z0-9A-Z]){$raw_noun}(?=[^a-z0-9A-Z])/i",
+                    "$noun($raw_noun)",
+                    $content
+                );
+            }
         }
 
-        foreach ($nounsList['nouns'] as $raw_noun => $noun) {
-            $content = preg_replace(
-                "/(?<=[^a-z0-9A-Z]){$raw_noun}(?=[^a-z0-9A-Z])/i",
-                "$noun ($raw_noun)",
-                $content
-            );
-        }
+        unset($content);
 
-        return $content;
+        return implode(PHP_EOL, $contents);
     }
 
     private function getNounsList()
@@ -49,5 +51,22 @@ class Handler
         $file =  "{$this->i18nDir}{$this->locale}.json";
         
         return json_decode(file_get_contents($file), true);
+    }
+
+    private function isCodeBlock($content)
+    {
+        if (substr($content, 0, 4) == '    ') {
+            if (
+                strpos($content, '-') !== false &&
+                substr($content, strpos($content, '-') - 1, 1) === ' ' &&
+                substr($content, strpos($content, '-') + 1, 1) === ' '
+            ) {
+                return false;
+            }
+
+            return true;
+        }
+
+        return false;
     }
 }
