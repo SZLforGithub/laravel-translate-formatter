@@ -32,3 +32,6 @@ This function set locale from English to something you want, it's default zh-TW 
 
 ### translate()
 This function will translate the corresponding nouns and return the result.
+
+## BTW
+I write the reason why I do this project in [my blog article](https://szlforgithub.github.io/post/almanac_2020_2021/#laravel-doc) but in Chinese. You can visit if you are interested it!
